@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.currencyconverter.MainController"
+      styleClass="root-pane"
+      spacing="0"
+      prefWidth="620" prefHeight="520">
+
+    <!-- ── Header ── -->
+    <VBox styleClass="header" alignment="CENTER">
+        <padding><Insets top="28" bottom="20" left="30" right="30"/></padding>
+        <Text text="Currency Converter" styleClass="header-title"/>
+        <Text text="Real-time exchange rates powered by ExchangeRate-API"
+              styleClass="header-subtitle"/>
+    </VBox>
+
+    <!-- ── Offline Banner (hidden by default) ── -->
+    <HBox fx:id="offlineBanner" styleClass="offline-banner"
+          alignment="CENTER" visible="false" managed="true">
+        <padding><Insets top="9" bottom="9" left="20" right="20"/></padding>
+        <Text fx:id="offlineBannerText"
+              text="📴  Offline mode — showing saved rates"
+              styleClass="offline-banner-text"/>
+    </HBox>
+
+    <!-- ── Main Card ── -->
+    <VBox styleClass="card" spacing="18" VBox.vgrow="ALWAYS">
+        <padding><Insets top="30" bottom="30" left="40" right="40"/></padding>
+
+        <!-- Amount Input -->
+        <VBox spacing="6">
+            <Text text="Amount" styleClass="label-text"/>
+            <TextField fx:id="amountField"
+                       promptText="Enter amount…"
+                       text="1"
+                       styleClass="amount-field"/>
+        </VBox>
+
+        <!-- From / Swap / To row -->
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <!-- From -->
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Text text="From" styleClass="label-text"/>
+                <ComboBox fx:id="fromCurrencyBox"
+                          styleClass="currency-box"
+                          maxWidth="Infinity"
+                          HBox.hgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- Swap button -->
+            <VBox alignment="BOTTOM_CENTER">
+                <padding><Insets bottom="0"/></padding>
+                <Button fx:id="swapButton"
+                        text="⇄"
+                        styleClass="swap-button"
+                        onAction="#onSwapClicked"
+                        translateY="10"/>
+            </VBox>
+
+            <!-- To -->
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Text text="To" styleClass="label-text"/>
+                <ComboBox fx:id="toCurrencyBox"
+                          styleClass="currency-box"
+                          maxWidth="Infinity"
+                          HBox.hgrow="ALWAYS"/>
+            </VBox>
+        </HBox>
+
+        <!-- Convert + Refresh buttons -->
+        <HBox spacing="12">
+            <Button fx:id="convertButton"
+                    text="Convert"
+                    styleClass="convert-button"
+                    onAction="#onConvertClicked"
+                    HBox.hgrow="ALWAYS"
+                    maxWidth="Infinity"/>
+            <Button fx:id="refreshButton"
+                    text="↻ Refresh Rates"
+                    styleClass="refresh-button"
+                    onAction="#onRefreshClicked"/>
+        </HBox>
+
+        <!-- Divider -->
+        <Separator styleClass="divider"/>
+
+        <!-- Result section -->
+        <VBox spacing="8" alignment="CENTER" styleClass="result-box">
+            <ProgressIndicator fx:id="loadingSpinner"
+                               prefWidth="32" prefHeight="32"
+                               visible="false"/>
+            <Text fx:id="resultText" text="—" styleClass="result-text"/>
+            <Text fx:id="rateText"   text=""  styleClass="rate-text"/>
+        </VBox>
+
+    </VBox>
+
+    <!-- ── Footer ── -->
+    <HBox styleClass="footer" alignment="CENTER_LEFT" spacing="12">
+        <padding><Insets top="10" bottom="10" left="40" right="40"/></padding>
+        <Text fx:id="statusText"     text="Ready" styleClass="status-text" HBox.hgrow="ALWAYS"/>
+        <Text fx:id="lastUpdatedText" text=""     styleClass="last-updated-text"/>
+    </HBox>
+
+</VBox>

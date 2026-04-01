@@ -1,0 +1,6 @@
+com\currencyconverter\ExchangeRateService$RateResult.class
+module-info.class
+com\currencyconverter\MainApp.class
+com\currencyconverter\ExchangeRateService$CachedRates.class
+com\currencyconverter\MainController.class
+com\currencyconverter\ExchangeRateService.class
